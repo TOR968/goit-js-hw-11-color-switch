@@ -14,14 +14,19 @@ const randomIntegerFromInterval = (min, max) => {
 
 const buttonStart = document.querySelector('[data-action="start"]');
 const buttonStop = document.querySelector('[data-action="stop"]');
+let timerId = null;
+
+
+buttonStart.addEventListener('click', () => { timerId = setInterval(changeBobyColor, 2000) });
+
+buttonStop.addEventListener('click', () => {
+  clearInterval(timerId);
+  buttonStart.disabled = false;
+});
 
 
 
-buttonStart.addEventListener('click', ChangeBobyColor);
-
-
-
-function ChangeBobyColor() {
-  document.body.style.backgroundColor = colors[randomIntegerFromInterval(0, colors.length - 1)];
-  console.log(colors[randomIntegerFromInterval(0, colors.length - 1)])
-};
+function changeBobyColor() {
+      document.body.style.backgroundColor = colors[randomIntegerFromInterval(0, colors.length - 1)];
+    buttonStart.disabled = true;
+}
